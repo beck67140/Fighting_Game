@@ -268,7 +268,7 @@ function rectanglesOverlap(rectangle1, rectangle2) {
 function resetRound() {
     clearTimeout(timerId)
 
-    timer = 60
+    timer = 90
     document.querySelector('#timer').innerHTML = timer
     document.querySelector('#displayText').style.display = 'none'
     document.querySelector('#playerHealth').style.width = '100%'
