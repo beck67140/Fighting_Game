@@ -452,7 +452,7 @@ function animate() {
                 speed: 8.2,
                 preferredRange: 180,
                 retreatThreshold: 130,
-                jumpChance: 0.35,
+                jumpChance: 0.4,
                 attackChance: 0.8,
                 attackCooldown: 16,
                 jumpCooldown: 30
@@ -461,7 +461,7 @@ function animate() {
                 speed: 8.2,
                 preferredRange: 140,
                 retreatThreshold: 170,
-                jumpChance: 0.72,
+                jumpChance: 0.7,
                 attackChance: 0.99,
                 attackCooldown: 6,
                 jumpCooldown: 14
@@ -470,7 +470,7 @@ function animate() {
                 speed: 16.4,
                 preferredRange: 120,
                 retreatThreshold: 50,
-                jumpChance: 0.7,
+                jumpChance: 0.65,
                 attackChance: 100,
                 attackCooldown: 0,
                 jumpCooldown: 10
