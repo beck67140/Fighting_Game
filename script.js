@@ -470,7 +470,7 @@ function animate() {
                 speed: 16.4,
                 preferredRange: 120,
                 retreatThreshold: 50,
-                jumpChance: 0.75,
+                jumpChance: 0.7,
                 attackChance: 100,
                 attackCooldown: 0,
                 jumpCooldown: 10
