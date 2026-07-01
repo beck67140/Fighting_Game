@@ -469,7 +469,7 @@ function animate() {
             impossible: {
                 speed: 16.4,
                 preferredRange: 120,
-                retreatThreshold: 50,
+                retreatThreshold: 60,
                 jumpChance: 0.15,
                 attackChance: 100,
                 attackCooldown: 0,
