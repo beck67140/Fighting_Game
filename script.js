@@ -197,6 +197,8 @@ let enemyDifficulty = 'normal'
 let enemyAttackCooldown = 0
 let enemyJumpCooldown = 0
 let enemyAiState = 'stance'
+let playerAttackCooldown = 0
+const ATTACK_COOLDOWN = 10 // frames between attacks when CPU mode is off
 
 if (cpuToggleButton) {
     cpuToggleButton.addEventListener('click', () => {
@@ -294,6 +296,7 @@ function resetRound() {
     enemyAttackCooldown = 0
     enemyJumpCooldown = 0
     enemyAiState = 'stance'
+    playerAttackCooldown = 0
     items = []
     itemSpawnTimer = 300
 
@@ -431,8 +434,8 @@ function animate() {
 
         const difficultySettings = {
             easy: {
-                speed: 2.5,
-                preferredRange: 240,
+                speed: 8.2,
+                preferredRange: 150,
                 retreatThreshold: 90,
                 jumpChance: 0.08,
                 attackChance: 0.25,
@@ -441,7 +444,7 @@ function animate() {
             },
             normal: {
                 speed: 8.2,
-                preferredRange: 210,
+                preferredRange: 150,
                 retreatThreshold: 110,
                 jumpChance: 0.2,
                 attackChance: 0.5,
@@ -450,7 +453,7 @@ function animate() {
             },
             hard: {
                 speed: 8.2,
-                preferredRange: 180,
+                preferredRange: 135,
                 retreatThreshold: 130,
                 jumpChance: 0.4,
                 attackChance: 0.8,
@@ -459,18 +462,18 @@ function animate() {
             },
             extreme: {
                 speed: 8.2,
-                preferredRange: 140,
-                retreatThreshold: 170,
-                jumpChance: 0.7,
-                attackChance: 0.99,
+                preferredRange: 125,
+                retreatThreshold: 130,
+                jumpChance: 0.6,
+                attackChance: 0.9,
                 attackCooldown: 6,
-                jumpCooldown: 14
+                jumpCooldown: 15
             },
             impossible: {
                 speed: 16.4,
                 preferredRange: 120,
                 retreatThreshold: 60,
-                jumpChance: 0.15,
+                jumpChance: 0.1,
                 attackChance: 100,
                 attackCooldown: 0,
                 jumpCooldown: 10
@@ -565,6 +568,9 @@ function animate() {
     player.update()
     enemy.update()
 
+    // Decrement attack cooldown for manual controls (when CPU mode is off)
+    playerAttackCooldown = Math.max(0, playerAttackCooldown - 1)
+
     const playerDamage = player.damageBoostTimer > 0 ? 8 : 5
     const enemyDamage = enemy.damageBoostTimer > 0 ? 8 : 5
 
@@ -647,7 +653,10 @@ window.addEventListener('keydown', (event) => {
             case 's':
                 if (!keys.s.pressed) {
                     keys.s.pressed = true
-                    player.attack()
+                    if (playerAttackCooldown <= 0) {
+                        player.attack()
+                        playerAttackCooldown = ATTACK_COOLDOWN
+                    }
                 }
                 break
         }
@@ -669,7 +678,10 @@ window.addEventListener('keydown', (event) => {
             case 'ArrowDown':
                 if (!keys.ArrowDown.pressed) {
                     keys.ArrowDown.pressed = true
-                    enemy.attack()
+                    if (playerAttackCooldown <= 0) {
+                        enemy.attack()
+                        playerAttackCooldown = ATTACK_COOLDOWN
+                    }
                 }
                 break
         }
