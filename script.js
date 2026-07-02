@@ -193,6 +193,7 @@ const difficultyHardButton = document.getElementById('difficultyHard')
 const difficultyExtremeButton = document.getElementById('difficultyExtreme')
 const difficultyThrowupButton = document.getElementById('difficultyThrowup')
 const difficultyImpossibleButton = document.getElementById('difficultyImpossible')
+const difficultyTortureButton = document.getElementById('difficultyTorture')
 let enemyIsCpu = false
 let enemyDifficulty = 'normal'
 let enemyAttackCooldown = 0
@@ -204,7 +205,7 @@ const ATTACK_COOLDOWN = 10 // frames between attacks when CPU mode is off
 if (cpuToggleButton) {
     cpuToggleButton.addEventListener('click', () => {
         enemyIsCpu = !enemyIsCpu
-        cpuToggleButton.textContent = `CPU: ${enemyIsCpu ? 'On' : 'Off'}`
+        cpuToggleButton.textContent = `AI: ${enemyIsCpu ? 'On' : 'Off'}`
 
         keys.ArrowRight.pressed = false
         keys.ArrowLeft.pressed = false
@@ -215,7 +216,7 @@ if (cpuToggleButton) {
 
 function setEnemyDifficulty(level) {
     enemyDifficulty = level
-    const buttons = [difficultyEasyButton, difficultyNormalButton, difficultyHardButton, difficultyExtremeButton, difficultyThrowupButton, difficultyImpossibleButton]
+    const buttons = [difficultyEasyButton, difficultyNormalButton, difficultyHardButton, difficultyExtremeButton, difficultyThrowupButton, difficultyImpossibleButton, difficultyTortureButton]
     buttons.forEach((button) => {
         if (!button) return
         button.style.backgroundColor = ''
@@ -228,7 +229,8 @@ function setEnemyDifficulty(level) {
         hard: difficultyHardButton,
         extreme: difficultyExtremeButton,
         throwup: difficultyThrowupButton,
-        impossible: difficultyImpossibleButton
+        impossible: difficultyImpossibleButton,
+        torture: difficultyTortureButton
     }[level]
 
     if (activeButton) {
@@ -245,6 +247,7 @@ if (difficultyHardButton) difficultyHardButton.addEventListener('click', () => s
 if (difficultyExtremeButton) difficultyExtremeButton.addEventListener('click', () => setEnemyDifficulty('extreme'))
 if (difficultyThrowupButton) difficultyThrowupButton.addEventListener('click', () => setEnemyDifficulty('throwup'))
 if (difficultyImpossibleButton) difficultyImpossibleButton.addEventListener('click', () => setEnemyDifficulty('impossible'))
+if (difficultyTortureButton) difficultyTortureButton.addEventListener('click', () => setEnemyDifficulty('torture'))
 setEnemyDifficulty('normal')
 
 function spawnRandomItem() {
@@ -482,9 +485,18 @@ function animate() {
                 jumpCooldown: 13
             },
             impossible: {
+                speed: 50,
+                preferredRange: 100,
+                retreatThreshold: 60,
+                jumpChance: 0.01,
+                attackChance: 100,
+                attackCooldown: 0,
+                jumpCooldown: 10
+            },
+            torture: {
                 speed: 16.4,
                 preferredRange: 120,
-                retreatThreshold: 60,
+                retreatThreshold: 35,
                 jumpChance: 0.1,
                 attackChance: 100,
                 attackCooldown: 0,
