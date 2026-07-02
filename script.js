@@ -191,6 +191,7 @@ const difficultyEasyButton = document.getElementById('difficultyEasy')
 const difficultyNormalButton = document.getElementById('difficultyNormal')
 const difficultyHardButton = document.getElementById('difficultyHard')
 const difficultyExtremeButton = document.getElementById('difficultyExtreme')
+const difficultyThrowupButton = document.getElementById('difficultyThrowup')
 const difficultyImpossibleButton = document.getElementById('difficultyImpossible')
 let enemyIsCpu = false
 let enemyDifficulty = 'normal'
@@ -214,7 +215,7 @@ if (cpuToggleButton) {
 
 function setEnemyDifficulty(level) {
     enemyDifficulty = level
-    const buttons = [difficultyEasyButton, difficultyNormalButton, difficultyHardButton, difficultyExtremeButton, difficultyImpossibleButton]
+    const buttons = [difficultyEasyButton, difficultyNormalButton, difficultyHardButton, difficultyExtremeButton, difficultyThrowupButton, difficultyImpossibleButton]
     buttons.forEach((button) => {
         if (!button) return
         button.style.backgroundColor = ''
@@ -226,6 +227,7 @@ function setEnemyDifficulty(level) {
         normal: difficultyNormalButton,
         hard: difficultyHardButton,
         extreme: difficultyExtremeButton,
+        throwup: difficultyThrowupButton,
         impossible: difficultyImpossibleButton
     }[level]
 
@@ -241,6 +243,7 @@ if (difficultyEasyButton) difficultyEasyButton.addEventListener('click', () => s
 if (difficultyNormalButton) difficultyNormalButton.addEventListener('click', () => setEnemyDifficulty('normal'))
 if (difficultyHardButton) difficultyHardButton.addEventListener('click', () => setEnemyDifficulty('hard'))
 if (difficultyExtremeButton) difficultyExtremeButton.addEventListener('click', () => setEnemyDifficulty('extreme'))
+if (difficultyThrowupButton) difficultyThrowupButton.addEventListener('click', () => setEnemyDifficulty('throwup'))
 if (difficultyImpossibleButton) difficultyImpossibleButton.addEventListener('click', () => setEnemyDifficulty('impossible'))
 setEnemyDifficulty('normal')
 
@@ -468,6 +471,15 @@ function animate() {
                 attackChance: 0.9,
                 attackCooldown: 6,
                 jumpCooldown: 15
+            },
+            throwup: {
+                speed: 10,
+                preferredRange: 123,
+                retreatThreshold: 80,
+                jumpChance: 0.3,
+                attackChance: 0.95,
+                attackCooldown: 3,
+                jumpCooldown: 13
             },
             impossible: {
                 speed: 16.4,
