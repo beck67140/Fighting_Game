@@ -1,0 +1,25 @@
+{
+  "name": "fighting_game",
+  "version": "1.0.0",
+  "description": "",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "deploy": "gh-pages -d ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/beck67140/Fighting_Game.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/beck67140/Fighting_Game/issues"
+  },
+  "homepage": "https://beck67140.github.io/Fighting_Game/",
+  "devDependencies": {
+    "gh-pages": "^6.3.0"
+  }
+}
